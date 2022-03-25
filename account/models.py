@@ -57,6 +57,11 @@ class Visit(models.Model):
 class Inventory(models.Model):
     UPScode = models.CharField(max_length=15)
     item_description = models.CharField(max_length=100)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def created(self):
+        self.created_date = timezone.now()
+        self.save()
 
     def __str__(self):
         return self.UPScode, self.item_description
@@ -69,6 +74,11 @@ class Order(models.Model):
     request_quantity = models.IntegerField(blank=False, null=False)
     delivered_quantity = models.IntegerField(blank=False, null=False)
     date = models.ForeignKey(Visit, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def created(self):
+        self.created_date = timezone.now()
+        self.save()
 
     def __str__(self):
         return self.client, self.date

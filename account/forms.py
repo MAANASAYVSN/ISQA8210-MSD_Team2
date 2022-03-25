@@ -40,3 +40,16 @@ class ClientForms(forms.ModelForm):
         model = Client
         fields = ('first_name', 'last_name', 'date_of_birth', 'gender', 'address',
                   'city', 'state', 'zip', 'email', 'phone', 'referred_by', 'reffered_to')
+
+
+class InventoryForms(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('UPScode', 'item_description')
+
+
+class OrderForms(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('client', 'UPScode', 'item_description', 'request_quantity', 'delivered_quantity',
+                  'date')

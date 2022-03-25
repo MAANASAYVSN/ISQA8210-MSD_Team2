@@ -82,8 +82,7 @@ def client_edit(request, pk):
             client.updated_date = timezone.now()
             client.save()
             client = Client.objects.filter(created_date__lte=timezone.now())
-            return render(request, 'crm/client_list.html',
-                          {'client': client})
+        return render(request, 'crm/client_list.html', {'client': client})
     else:
         # edit
         form = ClientForms(instance=client)
@@ -94,3 +93,60 @@ def client_delete(request, pk):
     client = get_object_or_404(Client, pk=pk)
     client.delete()
     return redirect('crm/client_list')
+
+
+def inventory_list(request):
+    inventory = Inventory.objects.filter(created_date__lte=timezone.now())
+    return render(request, 'crm/inventory_list.html', {'inventory': inventory})
+
+
+def inventory_edit(request, pk):
+    inventory = get_object_or_404(Inventory, pk=pk)
+    if request.method == "POST":
+        # update
+        form = InventoryForms(request.POST, instance=Inventory)
+        if form.is_valid():
+            inventory = form.save(commit=False)
+            inventory.updated_date = timezone.now()
+            inventory.save()
+            inventory = Inventory.objects.filter(created_date__lte=timezone.now())
+        return render(request, 'crm/inventory_list.html', {'inventory': inventory})
+    else:
+        # edit
+        form = InventoryForms(instance=inventory)
+    return render(request, 'crm/inventory_edit.html', {'form': form})
+
+
+def inventory_delete(request, pk):
+    inventory = get_object_or_404(Inventory, pk=pk)
+    inventory.delete()
+    return redirect('crm/inventory_list')
+
+
+def order_list(request):
+    order = Order.objects.filter(created_date__lte=timezone.now())
+    return render(request, 'crm/order_list.html', {'order': order})
+
+
+def order_edit(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == "POST":
+        # update
+        form = OrderForms(request.POST, instance=order)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.updated_date = timezone.now()
+            order.save()
+            order = Order.objects.filter(created_date__lte=timezone.now())
+        return render(request, 'crm/order_list.html', {'order': order})
+    else:
+        # edit
+        form = ClientForms(instance=order)
+    return render(request, 'crm/order_edit.html', {'form': form})
+
+
+def order_delete(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.delete()
+    return redirect('crm/order_list')
+

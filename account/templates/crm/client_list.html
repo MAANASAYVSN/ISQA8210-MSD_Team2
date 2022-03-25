@@ -26,7 +26,7 @@
                 <td>{{ client.phone }}</td>
                 <td><a href="{% url "client_edit" pk=client.pk %}" class="btn btn-warning">Edit</a></td>
                 <td><a href="{% url "client_delete" pk=client.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-warning">Delete</a></td>
-                <td><a href="" class="btn btn-warning">Groceries</a></td>
+                <td><a href="" class="btn btn-warning">Orders</a></td>
             </tr>
         {% endfor %}
         </tbody>
