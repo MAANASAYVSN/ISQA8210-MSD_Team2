@@ -9,6 +9,9 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 
 
+def home(request):
+    return render(request, 'base.html')
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -28,9 +31,9 @@ def user_login(request):
         return render(request, 'account/login.html', {'form': form})
 
 
-@login_required
+#@login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    return render(request, 'base.html', {'section': 'dashboard'})
 
 
 def register(request):
